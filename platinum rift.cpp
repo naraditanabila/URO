@@ -56,7 +56,7 @@ int main()
         // first line for movement commands, second line no longer used (see the protocol in the statement for details)
         for (int i = 0; i < zoneCount; ++i) {
             if (((myId == 0 && podsP0[i] != 0) || (myId == 1 && podsP1[i] != 0))) {
-                int next = adjZone[i][0];
+                int next = adjZone[i][rand()%5];
                 if (myId == 0) cout << podsP0[i];
                 else cout << podsP1[i];
                 cout << ' ' << i << ' ' << next << ' ';
