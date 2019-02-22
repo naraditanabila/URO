@@ -17,20 +17,20 @@ int main()
     int zoneCount; // the amount of zones on the map
     int linkCount; // the amount of links between all zones
     cin >> playerCount >> myId >> zoneCount >> linkCount;
-    int platinumSource[zoneCount];
+    int platinum[zoneCount];
     for (int i = 0; i < zoneCount; i++) {
         int zoneId; // this zone's ID (between 0 and zoneCount-1)
         cin >> zoneId;
-        cin >> platinumSource[zoneId];
+        cin >> platinum[zoneId];
     }
     
-    vector <int> adjacentZone[zoneCount];
+    vector <int> adjZone[zoneCount];
     for (int i = 0; i < linkCount; i++) {
         int zone1;
         int zone2;
         cin >> zone1 >> zone2;
-        adjacentZone[zone1].push_back(zone2);
-        adjacentZone[zone2].push_back(zone1);
+        adjZone[zone1].push_back(zone2);
+        adjZone[zone2].push_back(zone1);
     }
  
     int ownerId[zoneCount];
@@ -42,7 +42,7 @@ int main()
     // game loop
     while (1) {
         cin >> myPlatinum; 
-        //queue <int> prioQueue;
+        queue <int> prioQueue;
         for (int i = 0; i < zoneCount; i++) {
             int zId; // this zone's ID
             cin >> zId;
@@ -56,13 +56,15 @@ int main()
         // first line for movement commands, second line no longer used (see the protocol in the statement for details)
         for (int i = 0; i < zoneCount; ++i) {
             if (((myId == 0 && podsP0[i] != 0) || (myId == 1 && podsP1[i] != 0))) {
-                int next = adjacentZone[i][0];
+                int next = adjZone[i][0];
                 if (myId == 0) cout << podsP0[i];
                 else cout << podsP1[i];
                 cout << ' ' << i << ' ' << next << ' ';
             }
         }
+        
         cout << endl;
         cout << "WAIT" << endl;
+
     }
 }
